@@ -40,13 +40,11 @@ class BooksController < ApplicationController
     if @searchbook.save
       flash[:notice] = "Book was successfully created."
       @searchbook.update(book_params)
-      redirect_to book_path(@searchbook.id)
+      redirect_to book_path(@book.id)
     else
       flash[:alret] = "投稿に失敗しました"
       render action: :edit
     end
-
-
   end
 
   def destroy

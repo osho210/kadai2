@@ -24,9 +24,10 @@
 
 
     <!--テキストボックス削除の処理-->
-  <%= f.submit 'Update book'%>
+  <%= f.submit 'Update Book'%>
 <% end %>
 
 <!--editのルート作成--->
-<%= link_to 'show' , book_path(@book.id)%>
-<%= link_to 'back' , '/books' %>
+<%= link_to 'Show' , book_path(@book.id)%>
+|
+<%= link_to 'Back' , '/books' %>
