@@ -1,9 +1,13 @@
+<div class="text-success">
+  <%= flash[:notice] %>
+</div>
+
 <h1>Editing Book</h1>
 <!--空白判定-->
-<% if @searchBook.errors.any? %>
-  <%= @searchBook.errors.count %> errors prohibited this book from being saved:
+<% if @searchbook.errors.any? %>
+  <%= @searchbook.errors.count %> errors prohibited this book from being saved:
     <ul>
-      <% @searchBook.errors.full_messages.each do |message| %>
+      <% @searchbook.errors.full_messages.each do |message| %>
         <li><%= message%></li>
       <% end %>
     </ul>
@@ -13,18 +17,13 @@
 <!--記述処理-->
 <%= form_with model: @book , url: update_book_path(@book.id), method: :patch do |f|%>
   <p>Title</p>
-  <% if @searchBook.errors.any?%>
-    <%= f.text_field :""%>
-  <% else %>
     <%= f.text_field :title%>
-  <% end%>
 
   <p>Body</p>
-  <% if @searchBook.errors.any?%>
-    <%= f.text_field :""%>
-  <% else %>
-    <%= f.text_field :body%>
-  <% end%>
+    <%= f.text_area :body%>
+
+
+    <!--テキストボックス削除の処理-->
   <%= f.submit 'Update book'%>
 <% end %>
 

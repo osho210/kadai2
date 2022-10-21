@@ -16,8 +16,10 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
 
     if @book.save
+      flash[:notice] = "Book was successfully created."
       redirect_to book_path(@book.id)
     else
+      flash[:alret] = "投稿に失敗しました"
       render :index
     end
   end
@@ -28,19 +30,20 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    @searchBook = Book.new
+    @searchbook = Book.new
   end
 
   def update
     # 指定のidページ
     @book = Book.find(params[:id])
-    @searchBook = Book.new
-
-    if @searchBook.save
-      @searchBook.update(book_params)
-      redirect_to book_path(@searchBook.id)
+    @searchbook = Book.new(book_params)
+    if @searchbook.save
+      flash[:notice] = "Book was successfully created."
+      @searchbook.update(book_params)
+      redirect_to book_path(@searchbook.id)
     else
-      render :edit
+      flash[:alret] = "投稿に失敗しました"
+      render action: :edit
     end
 
 
