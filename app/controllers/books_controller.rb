@@ -28,12 +28,22 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    @searchBook = Book.new
   end
 
   def update
+    # 指定のidページ
     @book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)
+    @searchBook = Book.new
+
+    if @searchBook.save
+      @searchBook.update(book_params)
+      redirect_to book_path(@searchBook.id)
+    else
+      render :edit
+    end
+
+
   end
 
   def destroy
