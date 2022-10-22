@@ -1,31 +1,41 @@
-<div class="text-success">
-  <%= flash[:notice] %>
-</div>
-
 <h1>Editing Book</h1>
-<!--空白判定-->
+<!--errがある場合表示-->
 <% if @searchbook.errors.any? %>
-  <%= @searchbook.errors.count %> errors prohibited this book from being saved:
-    <ul>
-      <% @searchbook.errors.full_messages.each do |message| %>
-        <li><%= message%></li>
-      <% end %>
-    </ul>
+  <div id="error_explanation">
+    <h2><%= @searchbook.errors.count %> errors prohibited this book from being saved:</h2>
+      <ul>
+        <% @searchbook.errors.full_messages.each do |message| %>
+          <li><%= message%></li>
+        <% end %>
+      </ul>
+  </div>
 <% end %>
-
 
 <!--記述処理-->
 <%= form_with model: @book , url: update_book_path(@book.id), method: :patch do |f|%>
-  <p>Title</p>
-    <%= f.text_field :title%>
-
-  <p>Body</p>
-    <%= f.text_area :body%>
-
-
-    <!--テキストボックス削除の処理-->
-  <%= f.submit 'Update Book'%>
+  <!--新規記述-->
+  <div class="field">
+    <div class="<%= ' field_with_error' if @searchbook.errors.any? %>">
+      <label for="book_title">Title</label>
+    </div>
+    <div class="<%= ' field_with_error' if @searchbook.errors.any? %>">
+      <%= f.text_field :title %>
+    </div>
+  </div>
+  <div class="field">
+    <div class="<%= ' field_with_error' if @searchbook.errors.any? %>">
+       <label>Body</label>
+    </div>
+    <div class="<%= ' field_with_error' if @searchbook.errors.any? %>">
+       <%= f.text_area :body %>
+    </div>
+  </div>
+  <div class="action">
+    <%= f.submit 'Update Book'%>
+  </div>
 <% end %>
+
+
 
 <!--editのルート作成--->
 <%= link_to 'Show' , book_path(@book.id)%>
