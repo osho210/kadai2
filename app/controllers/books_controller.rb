@@ -30,19 +30,24 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    @searchbook = Book.new
+    @updateBook = Book.new
   end
 
   def update
     # 指定のidページ
     @book = Book.find(params[:id])
-    @searchbook = Book.new(book_params)
-    if @searchbook.save
+
+    # 更新する投稿データの取得
+    @updateBook = Book.new(book_params)
+
+    # 正常に処理されるとフラッシュメッセージ
+    if @updateBook.save
       flash[:notice] = "Book was successfully created."
-      @searchbook.update(book_params)
+      @updateBook.update(book_params)
       redirect_to book_path(@book.id)
+
+    #異常が起きるとeditを再描写
     else
-      flash[:alret] = "投稿に失敗しました"
       render action: :edit
     end
   end

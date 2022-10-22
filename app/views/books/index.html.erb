@@ -38,7 +38,9 @@
 </div>
 <% end %>
 
+<!--formの送信処理-->
 <%= form_with model: @book ,url: '/books' , method: :post do |f| %>
+
 <div class="field">
   <!--errがある場合class属性の追加-->
   <div class="<%= ' field_with_error' if @book.errors.any? %>">
@@ -48,6 +50,7 @@
     <%= f.text_field :title %>
   </div>
 </div>
+
 <div class="field">
   <div class="<%= ' field_with_error' if @book.errors.any? %>">
     <label>Body</label>
@@ -56,6 +59,8 @@
     <%= f.text_area :body %>
   </div>
 </div>
+
+<!--送信処理-->
 <div class="action">
   <%= f.submit 'Create Book' %>
 </div>
